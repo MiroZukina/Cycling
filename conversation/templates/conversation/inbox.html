@@ -1,0 +1,33 @@
+{% extends 'base1.html' %}
+
+{% block title %}Inbox{% endblock %}
+
+{% block content %}
+<div class="container mt-4">
+    <h1 class="mb-3 h4">Inbox</h1>
+
+    <div class="mb-3">
+        {% for conversation in conversations %}
+        <a href="{% url 'conversation:detail' conversation.id %}" class="text-decoration-none text-dark">
+            <div class="card mb-3">
+                <div class="row g-0">
+                    <div class="col-md-3">
+                        <img src="{{ conversation.item.image_url }}" class="img-fluid rounded-xl" style="max-width: 80px;">
+                    </div>
+                    <div class="col-md-9">
+                        <div class="card-body">
+                            {% for member in conversation.members.all %}
+                            {% if member != request.user %}
+                            <p class="mb-1"><strong>{{ member.username }}</strong> {{ conversation.modified_at }}</p>
+                            <p class="mb-1">{{ conversation.item.name }}</p>
+                            {% endif %}
+                            {% endfor %}
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </a>
+        {% endfor %}
+    </div>
+</div>
+{% endblock %}

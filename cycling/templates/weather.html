@@ -1,0 +1,46 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<div class="bg-light">
+
+  <div class="container mt-5">
+
+      <h2 class="mb-4">Weather Information</h2>
+
+      <!-- Add City Form -->
+      <form method="post" action="{% url 'weather' %}" class="mb-3">
+          {% csrf_token %}
+          {{ form.as_p }}
+          <button type="submit" name="add_city" class="btn btn-primary">Add City</button>
+      </form>
+
+      <!-- Clear All Cities Form -->
+      <form method="post" action="{% url 'weather' %}" class="mb-3">
+          {% csrf_token %}
+          <button type="submit" name="clear_all" class="btn btn-danger">Clear All</button>
+      </form>
+
+      <!-- Display weather information for each city -->
+      {% for weather_info in weather_data %}
+          <div class="card mt-3">
+              <div class="card-body">
+                  <h3 class="card-title">{{ weather_info.city }}</h3>
+                  <p class="card-text">Temperature: {{ weather_info.temperature }}°C</p>
+                  <p class="card-text">Description: {{ weather_info.description }}</p>
+                  
+                  <!-- Display Weather Icon -->
+                  <img src="http://openweathermap.org/img/wn/{{ weather_info.icon }}.png" alt="Weather Icon" class="img-fluid">
+                  
+                  <p class="card-text">Humidity: {{ weather_info.humidity }}%</p>
+                  <p class="card-text">Pressure: {{ weather_info.pressure }} hPa</p>
+                  <p class="card-text">Wind Speed: {{ weather_info.windspeed }} km/h</p>
+                  <p class="card-text">Sunrise: {{ weather_info.sunrise }}</p>
+                  <p class="card-text">Sunset: {{ weather_info.sunset }}</p>
+              </div>
+          </div>
+      {% endfor %}
+
+  </div>
+</div>
+{% endblock %}
+
