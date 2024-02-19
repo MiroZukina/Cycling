@@ -40,7 +40,7 @@ class EditItemForm(forms.ModelForm):
             'price': forms.TextInput(attrs={
                 'class': INPUT_CLASSES
             }),
-          'image': forms.FileInput(attrs={
+          'image_url': forms.FileInput(attrs={
                 'class': INPUT_CLASSES
             })
         }

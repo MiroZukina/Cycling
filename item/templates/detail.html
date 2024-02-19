@@ -1,7 +1,7 @@
 {% extends "base1.html" %}
 {% load static %}
 
-{% block title %}Welcome{% endblock %}
+{% block title %}Detail{% endblock %}
 
 {% block content %}
 <div class="container mt-4">
@@ -25,7 +25,7 @@
             {% if request.user == item.created_by %}
                 <div class="mt-4 p-3 p-md-4 bg-white rounded-xl">
                     <p>This is your item!</p>
-
+                    <a href="{% url 'item:edit' item.id %}" class="inline-block mt-6 px-6 py-3 text-lg font-semibold bg-teal-500 text-white rounded-xl">Edit</a>
                     <a href="{% url 'item:delete' item.id %}" class="btn btn-danger mt-3">Delete</a>
                 </div>
             {% else %}  
