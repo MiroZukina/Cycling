@@ -32,15 +32,17 @@ class EditItemForm(forms.ModelForm):
         fields = ('name', 'description', 'price', 'image_url', 'is_sold')
         widgets = {
             'name': forms.TextInput(attrs={
-                'class': INPUT_CLASSES
+                'class': 'INPUT_CLASSES'
             }),
             'description': forms.Textarea(attrs={
-                'class': INPUT_CLASSES
+                'class': 'INPUT_CLASSES'
             }),
             'price': forms.TextInput(attrs={
-                'class': INPUT_CLASSES
-            }),
-           'image_url': forms.ImageField(attrs={
                 'class': 'INPUT_CLASSES'
-            })
+            }),
         }
+    
+    # Adding a custom method to render the image_url field with class
+    def __init__(self, *args, **kwargs):
+        super(EditItemForm, self).__init__(*args, **kwargs)
+        self.fields['image_url'].widget.attrs['class'] = 'INPUT_CLASSES'
